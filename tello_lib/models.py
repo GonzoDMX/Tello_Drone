@@ -8,6 +8,7 @@ class DroneState(Enum):
     DISCONNECTED = "disconnected"
     CONNECTED = "connected"
     FLYING = "flying"
+    FLYING_UNSTABLE = "flying_unstable"
     LANDED = "landed"
     ERROR = "error"
 
@@ -18,12 +19,32 @@ class VideoStreamState(Enum):
     ERROR = "error"
 
 @dataclass
+class Coordinate:
+    x: float = 0.0
+    y: float = 0.0
+    z: float = 0.0
+
+@dataclass
+class Temperature:
+    low: int = 0
+    high: int = 0
+
+
+@dataclass
 class DroneStatus:
-    battery: int = 0
-    speed: int = 0
-    flight_time: int = 0
-    state: DroneState = DroneState.DISCONNECTED
-    height: int = 0
+    def __init__(self):
+        self.velocity = Coordinate()
+        self.acceleration = Coordinate()
+        self.temperature = Temperature()
+        self.pitch: int = 0
+        self.roll: int = 0
+        self.yaw: int = 0
+        self.altitude: int = 0
+        self.barometric_pressure: float = 0.0
+        self.time_of_flight: int = 0
+        self.time: int = 0
+        self.battery: int = 0
+        self.state: DroneState = DroneState.DISCONNECTED
 
 @dataclass
 class Command:
