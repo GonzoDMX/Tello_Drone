@@ -40,6 +40,4 @@ if drone.connect():
     drone.cleanup()
 ```
 
-## License
 
-MIT License
